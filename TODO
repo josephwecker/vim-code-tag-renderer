@@ -1,0 +1,6 @@
+[ ] Command line flag for forcing re-render
+[ ] Command line flag to skip render check
+[ ] Command line flags for various vim options
+[ ] Command line flag to disallow cacheing
+[ ] Command line flag to un-supress vim errors (2> dev/null right now)
+[ ] Removing extra newlines at beginning / end shouldn't remove tabs/spaces
