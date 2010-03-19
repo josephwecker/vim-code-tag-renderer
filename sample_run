@@ -1,0 +1,3 @@
+#!/bin/bash
+./vctr < sample.txt 2> /dev/null > rendered.sample.txt
+./vctr < sampl2.html 2> /dev/null > rendered.sample2.html
