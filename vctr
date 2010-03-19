@@ -49,7 +49,7 @@ def render_code(language, content):
     tmp.file.flush()
     cmd = '/bin/bash -c \'gvim -X -f +"let use_xhtml=1" +"set filetype=' + \
             language + '" +"syn on" +"run! syntax/2html.vim" +"wq" +"q" ' + \
-            tmp.name + "'"
+            tmp.name + " > /dev/null'"
     os.system(cmd)
     cont = open(tmp.name + '.html', 'r').read()
     os.unlink(tmp.name + '.html')
