@@ -9,7 +9,10 @@ Given any text file or stdin input, this program will scan it for any
 <code...></code> tags with 'lang="..."' attributes.  When it finds any it will
 replace it with xhtml that looks exactly like whatever it looks like in your
 locally installed gvim.  Whatever is in the 'lang' tag attribute is used as the
-filetype.
+filetype.  The xhtml output for each code block is a div with the class
+"code."- so have at it.  Keep in mind that if you have line numbers turned on
+in vim they'll show up here as well, making copying / pasting by viewers a
+little problematic.
 
 It stores code snippets in a ./.tmp_vctr_cache directory so that if you are
 running it in short iterations it won't have to regenerate every single snippet

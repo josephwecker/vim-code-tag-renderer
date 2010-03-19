@@ -1,3 +1,4 @@
 .*.swp
 *.pyc
 .tmp_vctr_cache
+rendered.*
