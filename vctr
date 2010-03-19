@@ -1,0 +1,38 @@
+#!/usr/bin/env python
+
+from optparse import OptionParser
+import fileinput, sys, re
+
+HELP_MSG = '''
+Given any text file or stdin input, this program will scan it for any
+<code...></code> tags with 'lang="..."' attributes.  When it finds any it will
+replace it with xhtml that looks exactly like whatever it looks like in your
+locally installed gvim.  Whatever is in the 'lang' tag attribute is used as the
+filetype.
+
+It stores code snippets in a ./.tmp_vctr_cache directory so that if you are
+running it in short iterations it won't have to regenerate every single snippet
+(which can take long when launching gvim on some platforms).  It requires gvim
+(although you can possibly get it to work with vim).
+
+Reads from stdin if no file specified. Output goes to stdout. If multiple files
+are specified they still go to stdout (effectively concatenating them).  Pulls
+it all into memory right now because I'm lazy.'''
+
+def parse_data(dat):
+    re_cb = re.compile(r'<code[^>]*?(?:lang="(?P<lang>[^"]*))[^>]*>(?P<cont>.*?)</code>', re.S | re.I)
+    for code_block in re_cb.finditer(dat):
+        print code_block.groups()
+        #swap_code_block(code_block)
+
+def main():
+    oparser = OptionParser(usage='Usage: %prog [options] [INPUT-FILE]', description=HELP_MSG)
+    # TODO: option for forcing (ignore cache) and for not doing a cache check
+    options, args = oparser.parse_args()
+    dat = ''
+    for d in fileinput.input(args):
+        dat += d
+    parse_data(dat)
+
+if __name__ == '__main__':
+    main()
