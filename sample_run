@@ -1,3 +1,4 @@
 #!/bin/bash
-./vctr < sample.txt 2> /dev/null > rendered.sample.txt
-./vctr < sampl2.html 2> /dev/null > rendered.sample2.html
+./vctr < sample.txt > rendered.sample.txt
+./vctr < sample2.html > rendered.sample2.html
+./vctr < src.README.md > README.md
