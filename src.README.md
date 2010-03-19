@@ -1,4 +1,11 @@
-== Vim Code Tag Renderer (Vctr [Victor])
+# Vctr (Victor)
+## Vim Code Tag Renderer
+
+**Author:** Joseph Wecker <joseph.wecker@gmail.com>
+
+**Copyright:** 2010 Joseph Wecker
+
+**License:** [MIT License](http://www.opensource.org/licenses/mit-license.php)
 
 Quick utility for utilizing vim's built in "TOhtml" functionality in any
 arbitrary file of yours.
@@ -21,7 +28,36 @@ Reads from stdin if no file specified. Output goes to stdout. If multiple files
 are specified they still go to stdout (effectively concatenating them).  Pulls
 it all into memory right now because I'm lazy.
 
-Example:
+### Example
 
-./vctr
+#### Original code
+(I pump this documentation through vctr.  In order to have it _not_ render this
+code below, I removed the quotes from around "erlang")
+
+	<code lang=erlang>
+	-module(factorial).
+	-export([factorial/1]).
+	
+	factorial(0) -> 1.
+	factorial(N) ->
+		N * factorial(N-1).
+	</code>
+
+#### Command to run
+
+<code lang="bash">
+./vctr < inputfile.txt > outputfile.html
+</code>
+
+#### Rendered (on my machine)
+
+<code lang="erlang">
+-module(factorial).
+-export([factorial/1]).
+
+factorial(0) -> 1.
+factorial(N) ->
+    N * factorial(N-1).
+</code>
+
 
