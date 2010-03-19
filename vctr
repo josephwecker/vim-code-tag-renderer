@@ -35,8 +35,10 @@ def calculate_id(lang, cont):
 
 def cleanup(text):
     text = '\n'.join(text.split('\n')[8:-2])
-    # TODO: replace '<body...' with something more reasonable
-    return text
+    text = re.sub(r'<body bgcolor="([^"]*)" text="([^"]*)">', \
+            r'<div class="code" style="background-color: \1; color: \2">', \
+            text)
+    return text.replace('</body>','</div>')
 
 def render_code(language, content):
     tmp = tempfile.NamedTemporaryFile()
