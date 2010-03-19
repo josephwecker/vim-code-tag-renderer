@@ -50,7 +50,7 @@ def render_code(language, content):
     cmd = '/bin/bash -c \'gvim -X -f +"let html_ignore_folding = 1" ' + \
             '+"let use_xhtml = 1" +"set filetype=' + \
             language + '" +"syn on" +"run! syntax/2html.vim" +"wq" +"q" ' + \
-            tmp.name + " > /dev/null'"
+            tmp.name + " > /dev/null 2> /dev/null'"
     os.system(cmd)
     cont = open(tmp.name + '.html', 'r').read()
     os.unlink(tmp.name + '.html')
@@ -60,6 +60,7 @@ def get_rendered(language, content):
     global comp_check
     global force_render_all
     global save_to_cache
+    content = content.strip()
     id = calculate_id(language, content)
     cache_loc = os.path.join(CACHE_D, id)
     if not force_render_all and not comp_check and os.path.exists(cache_loc):
