@@ -50,6 +50,8 @@ code below, I removed the quotes from around "erlang")
 </code>
 
 #### Rendered (on my machine)
+(Note: in github etc. this ends up getting sanitized- if that's where you're
+reading this, you'll have to trust that it looks awesome)
 
 <code lang="erlang">
 -module(factorial).

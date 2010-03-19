@@ -50,6 +50,8 @@ code below, I removed the quotes from around "erlang")
 </font></div>
 
 #### Rendered (on my machine)
+(Note: in github etc. this ends up getting sanitized- if that's where you're
+reading this, you'll have to trust that it looks awesome)
 
 <div class="code" style="background-color: #f2efd5; color: #404040"><font face="monospace">
 <span style="background-color: #e8e5d0"><font color="#808080">1 </font></span><span style="background-color: #f2efd5"><font color="#408077">-module</font></span>(<span style="background-color: #f2efd5"><font color="#202020"><u>factorial</u></font></span>).<br />
