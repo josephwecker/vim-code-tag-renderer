@@ -47,7 +47,8 @@ def render_code(language, content):
     tmp = tempfile.NamedTemporaryFile()
     tmp.file.write(content)
     tmp.file.flush()
-    cmd = '/bin/bash -c \'gvim -X -f +"let use_xhtml=1" +"set filetype=' + \
+    cmd = '/bin/bash -c \'gvim -X -f +"let html_ignore_folding = 1" ' + \
+            '+"let use_xhtml = 1" +"set filetype=' + \
             language + '" +"syn on" +"run! syntax/2html.vim" +"wq" +"q" ' + \
             tmp.name + " > /dev/null'"
     os.system(cmd)
