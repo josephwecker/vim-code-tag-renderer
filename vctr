@@ -2,8 +2,7 @@
 
 from optparse import OptionParser
 import fileinput, sys, re
-import hashlib
-import os
+import hashlib, os, tempfile
 
 HELP_MSG = '''
 Given any text file or stdin input, this program will scan it for any
@@ -34,8 +33,22 @@ def calculate_id(lang, cont):
     m.update(lang + cont)
     return str(len(cont)) + '_' + m.hexdigest()
 
+def cleanup(text):
+    text = '\n'.join(text.split('\n')[8:-2])
+    # TODO: replace '<body...' with something more reasonable
+    return text
+
 def render_code(language, content):
-    return 'uh.. rendered?'
+    tmp = tempfile.NamedTemporaryFile()
+    tmp.file.write(content)
+    tmp.file.flush()
+    cmd = '/bin/bash -c \'gvim -X -f +"let use_xhtml=1" +"set filetype=' + \
+            language + '" +"syn on" +"run! syntax/2html.vim" +"wq" +"q" ' + \
+            tmp.name + "'"
+    os.system(cmd)
+    cont = open(tmp.name + '.html', 'r').read()
+    os.unlink(tmp.name + '.html')
+    return cleanup(cont)
 
 def get_rendered(language, content):
     global comp_check
@@ -44,19 +57,16 @@ def get_rendered(language, content):
     id = calculate_id(language, content)
     cache_loc = os.path.join(CACHE_D, id)
     if not force_render_all and not comp_check and os.path.exists(cache_loc):
-        print '<1>',
         rendered = render_code(language, content)
         existing = open(cache_loc, 'r').read()
         comp_check = True
         force_render_all = rendered != existing
         return rendered
     if not force_render_all and os.path.exists(cache_loc):
-        print '<2>',
         return open(cache_loc, 'r').read()
     rendered = render_code(language, content)
     if save_to_cache:
         open(cache_loc,'w+').write(rendered)
-    print '<3>',
     return rendered
 
 def parse_data(dat):
